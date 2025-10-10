@@ -178,6 +178,7 @@
 !
 !  Apply lateral boundary conditions.
 !
+
       CALL ice_bc2d_tile (ng, tile, model, isISxx,                      &
      &                    LBi, UBi, LBj, UBj,                           &
      &                    IminS, ImaxS, JminS, JmaxS,                   &

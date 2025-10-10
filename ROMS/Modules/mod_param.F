@@ -1725,7 +1725,7 @@
 # endif
 #endif
 #ifdef ICE_MODEL
-      nLBCvar=nLBCvar+11           ! ICE varibles up to isVice=11
+      nLBCvar=nLBCvar+15 ! this should not be a hardcoded number, but rather nIceS
 #endif
 !
       IF (.not.allocated(LBC)) THEN

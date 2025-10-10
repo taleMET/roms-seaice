@@ -22,6 +22,9 @@
 #if defined HYPOXIA_SRM || defined RED_TIDE
       USE mod_biology
 #endif
+#ifdef ICE_MODEL
+      USE mod_ice
+#endif
       USE mod_boundary
       USE mod_clima
       USE mod_forces
@@ -916,6 +919,7 @@
      &                    BOUNDARY(ng) % zetaG_west)
           IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
         END IF
+
 !
         IF (LBC(ieast,isFsur,ng)%acquire) THEN
           CALL get_ngfld (ng, iNLM, idZbry(ieast),                      &
@@ -1247,6 +1251,68 @@
         END DO
       END IF
 # endif
+#endif
+
+#ifdef ICE_MODEL
+# ifndef ANA_AIOBC 
+! need to think about these ana-things for ice..
+      IF (LprocessOBC(ng)) THEN
+        DO i=1,15!nIceS
+          
+          IF (LBC(iwest,ibICE(i),ng)%acquire) THEN
+            CALL get_ngfld (ng, iNLM, iceOBC(iwest,i),                &
+     &                      BRYncid(iceOBC(iwest,i),ng),              &
+# if defined PIO_LIB && defined DISTRIBUTE
+     &                      BRYpioFile(iceOBC(iwest,i),ng),           &
+# endif
+     &                      nBCfiles(ng), BRY(1,ng),                  &
+     &                      recordless, update(1),                    &
+     &                      JLB, JUB, 1, 2, 0, Mm(ng)+1, 1,           &
+     &                      BOUNDARY(ng) % iceG_west(i,:,:))
+            IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+          END IF
+!
+          IF (LBC(ieast,ibICE(i),ng)%acquire) THEN
+            CALL get_ngfld (ng, iNLM, iceOBC(ieast,i),                &
+     &                      BRYncid(iceOBC(ieast,i),ng),              &
+# if defined PIO_LIB && defined DISTRIBUTE
+     &                      BRYpioFile(iceOBC(ieast,i),ng),           &
+# endif
+     &                      nBCfiles(ng), BRY(1,ng),                  &
+     &                      recordless, update(1),                    &
+     &                      JLB, JUB, 1, 2, 0, Mm(ng)+1, 1,           &
+     &                      BOUNDARY(ng) % iceG_east(i,:,:))
+                IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+           END IF
+!
+          IF (LBC(isouth,ibICE(i),ng)%acquire) THEN
+            CALL get_ngfld (ng, iNLM, iceOBC(isouth,i),                &
+     &                      BRYncid(iceOBC(isouth,i),ng),              &
+# if defined PIO_LIB && defined DISTRIBUTE
+     &                      BRYpioFile(iceOBC(isouth,i),ng),           &
+# endif
+     &                      nBCfiles(ng), BRY(1,ng),                   &
+     &                      recordless, update(1),                     &
+     &                      ILB, IUB, 1, 2, 0, Lm(ng)+1, 1,            &
+     &                      BOUNDARY(ng) % iceG_south(i,:,:))
+                IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+           END IF
+!
+          IF (LBC(inorth,ibICE(i),ng)%acquire) THEN
+            CALL get_ngfld (ng, iNLM, iceOBC(inorth,i),                &
+     &                      BRYncid(iceOBC(inorth,i),ng),              &
+# if defined PIO_LIB && defined DISTRIBUTE
+     &                      BRYpioFile(iceOBC(inorth,i),ng),           &
+# endif
+     &                      nBCfiles(ng), BRY(1,ng),                   &
+     &                      recordless, update(1),                     &
+     &                      ILB, IUB, 1, 2, 0, Lm(ng)+1, 1,            &
+     &                      BOUNDARY(ng) % iceG_north(i,:,:))
+                IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+           END IF
+        END DO
+      END IF
+#  endif
 #endif
 !
 !=======================================================================

@@ -50,6 +50,9 @@
 # if defined HYPOXIA_SRM || defined RED_TIDE
       USE mod_biology
 # endif
+#ifdef ICE_MODEL
+      USE mod_ice
+#endif
       USE mod_boundary
       USE mod_clima
       USE mod_forces
@@ -1218,6 +1221,60 @@
         END IF
 #  endif
       END IF
+
+# endif
+
+# ifdef ICE_MODEL
+!
+!  Set sea ice variables open boundary conditions.
+!
+      IF (LprocessOBC(ng)) THEN
+# ifdef ANA_AIOBC
+        !CALL ana_fsobc (ng, tile, iNLM) !! what here?
+# else
+      ! whats up with the SouthWest_Test?
+        IF (DOMAIN(ng)%SouthWest_Test(tile)) THEN
+          DO i=1,15!nIceS
+            IF (LBC(iwest,ibICE(i),ng)%acquire) THEN
+              CALL set_ngfld (ng, iNLM, iceOBC(iwest,i), JLB, JUB, 1,    &
+     &                        0, Mm(ng)+1, 1,                            &
+     &                        BOUNDARY(ng) % iceG_west(i,:,:),           &
+     &                        BOUNDARY(ng) % ice_west(i,:),              &
+     &                        update)
+              IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+            END IF
+!
+            IF (LBC(ieast,ibICE(i),ng)%acquire) THEN
+              CALL set_ngfld (ng, iNLM, iceOBC(ieast,i), JLB, JUB, 1,    &
+     &                        0, Mm(ng)+1, 1,                            &
+     &                        BOUNDARY(ng) % iceG_east(i,:,:),           &
+     &                        BOUNDARY(ng) % ice_east(i,:),              &
+     &                        update)
+              IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+            END IF
+!
+            IF (LBC(isouth,ibICE(i),ng)%acquire) THEN
+              CALL set_ngfld (ng, iNLM, iceOBC(isouth,i), ILB, IUB, 1,    &
+     &                        0, Lm(ng)+1, 1,                            &
+     &                        BOUNDARY(ng) % iceG_south(i,:,:),           &
+     &                        BOUNDARY(ng) % ice_south(i,:),              &
+     &                        update)
+              IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+            END IF
+!
+            IF (LBC(inorth,ibICE(i),ng)%acquire) THEN
+              CALL set_ngfld (ng, iNLM, iceOBC(inorth,i), ILB, IUB, 1,    &
+     &                        0, Lm(ng)+1, 1,                            &
+     &                        BOUNDARY(ng) % iceG_north(i,:,:),           &
+     &                        BOUNDARY(ng) % ice_north(i,:),              &
+     &                        update)
+              IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
+            END IF
+          END DO
+        END IF
+# endif
+      END IF
+
 # endif
 !
 !=======================================================================

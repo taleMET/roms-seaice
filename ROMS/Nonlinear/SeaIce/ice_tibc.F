@@ -19,6 +19,7 @@
       USE mod_grid
       USE mod_ice
       USE mod_scalars
+      USE mod_boundary
 !
       implicit none
 !
@@ -113,8 +114,8 @@
 !
         IF (LBC(iwest,ibICE(isTice),ng)%clamped) THEN
           DO j=Jstr,Jend
-            enthalpy(Istr-1,j,linew)=ICE_LOBC(isHice,ng)%ice_west(j)*   &
-     &                               ICE_LOBC(isTice,ng)%ice_west(j)
+            enthalpy(Istr-1,j,linew)=BOUNDARY(ng)%ice_west(isHice,j)*   &
+     &                               BOUNDARY(ng)%ice_west(isTice,j)
 # ifdef MASKING
             enthalpy(Istr-1,j,linew)=enthalpy(Istr-1,j,linew)*          &
      &                               GRID(ng)%rmask(Istr-1,j)
@@ -136,8 +137,8 @@
         ELSE IF (LBC(iwest,ibICE(isTice),ng)%mixed) THEN
           DO j=Jstr,Jend
             IF (ui(Istr,j,linew).ge.0.0_r8) THEN
-              enthalpy(Istr-1,j,linew)=ICE_LOBC(isHice,ng)%ice_west(j)* &
-     &                                 ICE_LOBC(isTice,ng)%ice_west(j)
+              enthalpy(Istr-1,j,linew)=BOUNDARY(ng)%ice_west(isHice,j)* &
+     &                                 BOUNDARY(ng)%ice_west(isTice,j)
 # ifdef MASKING
               enthalpy(Istr-1,j,linew)=enthalpy(Istr-1,j,linew)*        &
      &                                 GRID(ng)%rmask(Istr-1,j)
@@ -221,8 +222,8 @@
 !  Eastern edge, clamped boundary condition.
 !
           DO j=Jstr,Jend
-            enthalpy(Iend+1,j,linew)=ICE_LOBC(isHice,ng)%ice_east(j)*   &
-     &                               ICE_LOBC(isTice,ng)%ice_east(j)
+            enthalpy(Iend+1,j,linew)=BOUNDARY(ng)%ice_east(isHice,j)*   &
+     &                               BOUNDARY(ng)%ice_east(isTice,j)
 # ifdef MASKING
             enthalpy(Iend+1,j,linew)=enthalpy(Iend+1,j,linew)*          &
      &                               GRID(ng)%rmask(Iend+1,j)
@@ -244,8 +245,8 @@
         ELSE IF (LBC(ieast,ibICE(isTice),ng)%mixed) THEN
           DO j=Jstr,Jend
             IF (ui(Iend+1,j,linew).le.0.0_r8) THEN
-              enthalpy(Iend+1,j,linew)=ICE_LOBC(isHice,ng)%ice_east(j)* &
-     &                                 ICE_LOBC(isTice,ng)%ice_east(j)
+              enthalpy(Iend+1,j,linew)=BOUNDARY(ng)%ice_east(isHice,j)* &
+     &                                 BOUNDARY(ng)%ice_east(isTice,j)
 # ifdef MASKING
               enthalpy(Iend+1,j,linew)=enthalpy(Iend+1,j,linew)*        &
      &                                 GRID(ng)%rmask(Iend+1,j)
@@ -330,8 +331,8 @@
 !  Southern edge, clamped boundary condition.
 !
           DO i=Istr,Iend
-            enthalpy(i,Jstr-1,linew)=ICE_LOBC(isHice,ng)%ice_south(i)*  &
-     &                               ICE_LOBC(isTice,ng)%ice_south(i)
+            enthalpy(i,Jstr-1,linew)=BOUNDARY(ng)%ice_south(isHice,i)*  &
+     &                               BOUNDARY(ng)%ice_south(isTice,i)
 # ifdef MASKING
             enthalpy(i,Jstr-1,linew)=enthalpy(i,Jstr-1,linew)*          &
      &                               GRID(ng)%rmask(i,Jstr-1)
@@ -353,8 +354,8 @@
         ELSE IF (LBC(isouth,ibICE(isTice),ng)%mixed) THEN
           DO i=Istr,Iend
             IF (vi(i,1,linew).ge.0.0_r8) THEN
-              enthalpy(i,Jstr-1,linew)=ICE_LOBC(isHice,ng)%ice_south(i)*&
-     &                                 ICE_LOBC(isTice,ng)%ice_south(i)
+              enthalpy(i,Jstr-1,linew)=BOUNDARY(ng)%ice_south(isHice,i)*&
+     &                                 BOUNDARY(ng)%ice_south(isTice,i)
 # ifdef MASKING
               enthalpy(i,Jstr-1,linew)=enthalpy(i,Jstr-1,linew)*        &
      &                                 GRID(ng)%rmask(i,Jstr-1)
@@ -437,8 +438,8 @@
 !  Northern edge, clamped boundary condition.
 !
           DO i=Istr,Iend
-            enthalpy(i,Jend+1,linew)=ICE_LOBC(isHice,ng)%ice_north(i)*  &
-     &                               ICE_LOBC(isTice,ng)%ice_north(i)
+            enthalpy(i,Jend+1,linew)=BOUNDARY(ng)%ice_north(isHice,i)*  &
+     &                               BOUNDARY(ng)%ice_north(isTice,i)
 # ifdef MASKING
             enthalpy(i,Jend+1,linew)=enthalpy(i,Jend+1,linew)*          &
      &                               GRID(ng)%rmask(i,Jend+1)
@@ -460,8 +461,8 @@
         ELSE IF (LBC(inorth,ibICE(isTice),ng)%mixed) THEN
           DO i=Istr,Iend
             IF (vi(i,Jend+1,linew).le.0.0_r8) THEN
-              enthalpy(i,Jend+1,linew)=ICE_LOBC(isHice,ng)%ice_north(i)*&
-     &                                 ICE_LOBC(isTice,ng)%ice_north(i)
+              enthalpy(i,Jend+1,linew)=BOUNDARY(ng)%ice_north(isHice,i)*&
+     &                                 BOUNDARY(ng)%ice_north(isTice,i)
 # ifdef MASKING
               enthalpy(i,Jend+1,linew)=enthalpy(i,Jend+1,linew)*        &
      &                                 GRID(ng)%rmask(i,Jend+1)

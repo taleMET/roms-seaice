@@ -123,6 +123,9 @@
       integer :: idW_fr       ! rate of ice accretion by frazil growth
       integer :: idW_io       ! rate of melt/freeze at ice/ocean edge
       integer :: idW_ro       ! rate of melt/freeze runoff into ocean
+      integer :: idEnth       ! ice/brine enthalpy
+      integer :: idUevp       ! EVP ice U-velocity
+      integer :: idVevp       ! EVP ice V-velocity
 !
 !  Ice model state prognostic variables indices.
 !
