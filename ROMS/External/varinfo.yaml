@@ -1908,6 +1908,96 @@ metadata:
     add_offset:     0.0d0
     scale:          1.0d0
 
+  - variable:       Uice_west                          # Input
+    standard_name:  sea_ice_x_velocity
+    long_name:      u-component of ice velocity western boundary condition
+    units:          meter second-1
+    field:          sea ice x-velocity western-boundary
+    time:           ocean_time
+    index_code:     isUice(iwest)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
+  - variable:       Uice_east                          # Input
+    standard_name:  sea_ice_x_velocity
+    long_name:      u-component of ice velocity eastern boundary condition
+    units:          meter second-1
+    field:          sea ice x-velocity eastern-boundary
+    time:           ocean_time
+    index_code:     isUice(ieast)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
+  - variable:       Uice_south                          # Input
+    standard_name:  sea_ice_x_velocity
+    long_name:      u-component of ice velocity southern boundary condition
+    units:          meter second-1
+    field:          sea ice x-velocity southern-boundary
+    time:           ocean_time
+    index_code:     isUice(isouth)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+    
+  - variable:       Uice_north                          # Input
+    standard_name:  sea_ice_x_velocity
+    long_name:      u-component of ice velocity northern boundary condition
+    units:          meter second-1
+    field:          sea ice x-velocity northern-boundary
+    time:           ocean_time
+    index_code:     isUice(inorth)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
+
+
+  - variable:       Vice_west                          # Input
+    standard_name:  sea_ice_y_velocity
+    long_name:      v-component of ice velocity western boundary condition
+    units:          meter second-1
+    field:          sea ice y-velocity western-boundary
+    time:           ocean_time
+    index_code:     isVice(iwest)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
+  - variable:       Vice_east                          # Input
+    standard_name:  sea_ice_y_velocity
+    long_name:      v-component of ice velocity eastern boundary condition
+    units:          meter second-1
+    field:          sea ice y-velocity eastern-boundary
+    time:           ocean_time
+    index_code:     isVice(ieast)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
+  - variable:       Vice_south                          # Input
+    standard_name:  sea_ice_y_velocity
+    long_name:      v-component of ice velocity southern boundary condition
+    units:          meter second-1
+    field:          sea ice y-velocity southern-boundary
+    time:           ocean_time
+    index_code:     isVice(isouth)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+    
+  - variable:       Vice_north                          # Input
+    standard_name:  sea_ice_y_velocity
+    long_name:      v-component of ice velocity northern boundary condition
+    units:          meter second-1
+    field:          sea ice y-velocity northern-boundary
+    time:           ocean_time
+    index_code:     isVice(inorth)
+    type:           u2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
   #######################################
   ###  Atmospheric Forcing Variables  ###
   #######################################
