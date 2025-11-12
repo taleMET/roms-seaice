@@ -87,6 +87,8 @@
               Npts=load_r(Nval, Rval, Ngrids, Cd_io)
             CASE ('Astrength')
               Npts=load_r(Nval, Rval, Ngrids, Astrength)
+            CASE ('Pstar')
+              Npts=load_r(Nval, Rval, Ngrids, Pstar)
             CASE ('zetaMin')
               Npts=load_r(Nval, Rval, Ngrids, zetaMin)
             CASE ('zetaMax')
