@@ -204,6 +204,7 @@
 # endif
             ti(Istr-1,j,linew)=enthalpy(Istr-1,j,linew)/                &
      &                         MAX(hi(Istr-1,j,linew),eps)
+!             ti(Istr-1,j,linew)=ti(Istr,j,linew)
             IF (hi(Istr-1,j,linew).le.min_hi(ng)) THEN
               enthalpy(Istr-1,j,linew)=0.0_r8
               ti(Istr-1,j,linew)=0.0_r8
@@ -313,6 +314,7 @@
 # endif
             ti(Iend+1,j,linew)=enthalpy(Iend+1,j,linew)/                &
      &                         MAX(hi(Iend+1,j,linew),eps)
+!             ti(Iend+1,j,linew)=ti(Iend,j,linew)
             IF (hi(Iend+1,j,linew).le.min_hi(ng)) THEN
               enthalpy(Iend+1,j,linew)=0.0_r8
               ti(Iend+1,j,linew)=0.0_r8
@@ -420,6 +422,7 @@
 # endif
             ti(i,Jstr-1,linew)=enthalpy(i,Jstr-1,linew)/                &
      &                         MAX(hi(i,Jstr-1,linew),eps)
+!             ti(i,Jstr-1,linew)=ti(i,Jstr,linew)
             IF (hi(i,Jstr-1,linew).le.min_hi(ng)) THEN
               enthalpy(i,Jstr-1,linew)=0.0_r8
               ti(i,Jstr-1,linew)=0.0_r8
@@ -533,6 +536,7 @@
 # endif
             ti(i,Jend+1,linew)=enthalpy(i,Jend+1,linew)/                &
      &                         MAX(hi(i,Jend+1,linew),eps)
+!             ti(i,Jend+1,linew)=ti(i,Jend,linew)
             IF (hi(i,Jend+1,linew).le.min_hi(ng)) THEN
               enthalpy(i,Jend+1,linew)=0.0_r8
               ti(i,Jend+1,linew)=0.0_r8
