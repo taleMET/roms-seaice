@@ -65,6 +65,7 @@
       integer :: ILB, IUB, JLB, JUB
       integer :: LBi, UBi, LBj, UBj
       integer :: i, ic, my_tile
+      integer :: iceIstrL, iceIstrM
 !
       character (len=*), parameter :: MyFile =                          &
      &  __FILE__
@@ -1258,7 +1259,18 @@
 ! need to think about these ana-things for ice..
       IF (LprocessOBC(ng)) THEN
         DO i=1,15!nIceS
-          
+          ! If the ice variable is a velocity variable, we must make sure we
+          ! read one less number in one direction
+          IF (i==10) THEN
+            iceIstrL = 1
+            iceIstrM = 0
+          ELSE IF (i==11) THEN
+            iceIstrL = 0
+            iceIstrM = 1
+          ELSE
+            iceIstrL = 0
+            iceIstrM = 0
+          END IF
           IF (LBC(iwest,ibICE(i),ng)%acquire) THEN
             CALL get_ngfld (ng, iNLM, iceOBC(iwest,i),                &
      &                      BRYncid(iceOBC(iwest,i),ng),              &
@@ -1267,7 +1279,7 @@
 # endif
      &                      nBCfiles(ng), BRY(1,ng),                  &
      &                      recordless, update(1),                    &
-     &                      JLB, JUB, 1, 2, 0, Mm(ng)+1, 1,           &
+     &                      JLB, JUB, 1, 2, iceIstrM, Mm(ng)+1, 1,           &
      &                      BOUNDARY(ng) % iceG_west(i,:,:))
             IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
           END IF
@@ -1280,7 +1292,7 @@
 # endif
      &                      nBCfiles(ng), BRY(1,ng),                  &
      &                      recordless, update(1),                    &
-     &                      JLB, JUB, 1, 2, 0, Mm(ng)+1, 1,           &
+     &                      JLB, JUB, 1, 2, iceIstrM, Mm(ng)+1, 1,           &
      &                      BOUNDARY(ng) % iceG_east(i,:,:))
                 IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
            END IF
@@ -1293,7 +1305,7 @@
 # endif
      &                      nBCfiles(ng), BRY(1,ng),                   &
      &                      recordless, update(1),                     &
-     &                      ILB, IUB, 1, 2, 0, Lm(ng)+1, 1,            &
+     &                      ILB, IUB, 1, 2, iceIstrL, Lm(ng)+1, 1,            &
      &                      BOUNDARY(ng) % iceG_south(i,:,:))
                 IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
            END IF
@@ -1306,7 +1318,7 @@
 # endif
      &                      nBCfiles(ng), BRY(1,ng),                   &
      &                      recordless, update(1),                     &
-     &                      ILB, IUB, 1, 2, 0, Lm(ng)+1, 1,            &
+     &                      ILB, IUB, 1, 2, iceIstrL, Lm(ng)+1, 1,            &
      &                      BOUNDARY(ng) % iceG_north(i,:,:))
                 IF (FoundError(exit_flag, NoError, __LINE__, MyFile)) RETURN
            END IF

@@ -101,6 +101,7 @@
 !
       integer :: ILB, IUB, JLB, JUB
       integer :: i, ic, itrc, j, k, my_tile
+      integer :: iceIstrL, iceIstrM
 !
       real(r8) :: cff, cff1, cff2
 !
@@ -1235,9 +1236,21 @@
       ! whats up with the SouthWest_Test?
         IF (DOMAIN(ng)%SouthWest_Test(tile)) THEN
           DO i=1,15!nIceS
+          ! If the ice variable is a velocity variable, we must make sure we
+          ! read one less number in one direction
+          IF (i==10) THEN
+            iceIstrL = 1
+            iceIstrM = 0
+          ELSE IF (i==11) THEN
+            iceIstrL = 0
+            iceIstrM = 1
+          ELSE
+            iceIstrL = 0
+            iceIstrM = 0
+          END IF
             IF (LBC(iwest,ibICE(i),ng)%acquire) THEN
               CALL set_ngfld (ng, iNLM, iceOBC(iwest,i), JLB, JUB, 1,    &
-     &                        0, Mm(ng)+1, 1,                            &
+     &                        iceIstrM, Mm(ng)+1, 1,                            &
      &                        BOUNDARY(ng) % iceG_west(i,:,:),           &
      &                        BOUNDARY(ng) % ice_west(i,:),              &
      &                        update)
@@ -1246,7 +1259,7 @@
 !
             IF (LBC(ieast,ibICE(i),ng)%acquire) THEN
               CALL set_ngfld (ng, iNLM, iceOBC(ieast,i), JLB, JUB, 1,    &
-     &                        0, Mm(ng)+1, 1,                            &
+     &                        iceIstrM, Mm(ng)+1, 1,                            &
      &                        BOUNDARY(ng) % iceG_east(i,:,:),           &
      &                        BOUNDARY(ng) % ice_east(i,:),              &
      &                        update)
@@ -1255,7 +1268,7 @@
 !
             IF (LBC(isouth,ibICE(i),ng)%acquire) THEN
               CALL set_ngfld (ng, iNLM, iceOBC(isouth,i), ILB, IUB, 1,    &
-     &                        0, Lm(ng)+1, 1,                            &
+     &                        iceIstrL, Lm(ng)+1, 1,                            &
      &                        BOUNDARY(ng) % iceG_south(i,:,:),           &
      &                        BOUNDARY(ng) % ice_south(i,:),              &
      &                        update)
@@ -1264,7 +1277,7 @@
 !
             IF (LBC(inorth,ibICE(i),ng)%acquire) THEN
               CALL set_ngfld (ng, iNLM, iceOBC(inorth,i), ILB, IUB, 1,    &
-     &                        0, Lm(ng)+1, 1,                            &
+     &                        iceIstrL, Lm(ng)+1, 1,                            &
      &                        BOUNDARY(ng) % iceG_north(i,:,:),           &
      &                        BOUNDARY(ng) % ice_north(i,:),              &
      &                        update)
