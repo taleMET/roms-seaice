@@ -217,8 +217,8 @@
 !
 !  Ice equations time step (s).
 !
-      integer, allocatable :: dtice(:)          ! viscous
-      integer, allocatable :: dtevp(:)          ! elastic
+      real(r8), allocatable :: dtice(:)          ! viscous
+      real(r8), allocatable :: dtevp(:)          ! elastic
 !
 !  Density parameters (kg/m3).
 !
