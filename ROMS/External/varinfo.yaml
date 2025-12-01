@@ -7183,6 +7183,28 @@ metadata:
     add_offset:     0.0d0
     scale:          1.0d0
 
+  - variable:       ice_snow_heat_conductivity                               # Output
+    standard_name:  ice/snow heat conductivity
+    long_name:      ice/snow heat conductivity
+    units:          .                                    
+    field:          ice/snow heat conductivity
+    time:           ocean_time
+    index_code:     idQcon
+    type:           r2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
+  - variable:       RHS_heat_flux_over_ice_snow                               # Output
+    standard_name:  RHS heat flux over ice/snow
+    long_name:      RHS heat flux over ice/snow
+    units:          .                                    
+    field:          RHS heat flux over ice/snow
+    time:           ocean_time
+    index_code:     idQrhs
+    type:           r2dvar
+    add_offset:     0.0d0
+    scale:          1.0d0
+
   ##############################################
   ###  Vegetation/Marshland State Variables  ###
   ##############################################

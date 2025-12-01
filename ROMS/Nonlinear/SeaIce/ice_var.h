@@ -114,6 +114,12 @@
           CASE ('idVevp')
             idVevp=varid
             iSice(isVevp)=idVevp
+          CASE ('idQcon')
+            idQcon=varid
+            iSice(icQcon)=idQcon
+          CASE ('idQrhs')
+            idQrhs=varid
+            iSice(icQrhs)=idQrhs
 
 /*
 **  Ice model open boundary conditions.

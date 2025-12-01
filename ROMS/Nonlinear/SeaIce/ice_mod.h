@@ -126,6 +126,8 @@
       integer :: idEnth       ! ice/brine enthalpy
       integer :: idUevp       ! EVP ice U-velocity
       integer :: idVevp       ! EVP ice V-velocity
+      integer :: idQcon       ! ice/snow heat conductivity
+      integer :: idQrhs       ! RHS heat flux over ice/snow
 !
 !  Ice model state prognostic variables indices.
 !

@@ -1169,7 +1169,7 @@
 !
 !  Option where the incoming longwave radiation (downward) is given as
 !  input (lrflx). The following should be consistent, with the implicit
-!  (pseudo) approach to solving for 'Fi(:,:,icIsst). Here, 'Qlw_i' is
+!  (pseudo) approach to solving for 'Fi(:,:,icIsst)'. Here, 'Qlw_i' is
 !  the flux from ice to atmosphere, thus the negative sign (SMD).
 !
           cff3=StefBo*emmiss*(TiceK**3)
