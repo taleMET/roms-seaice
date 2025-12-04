@@ -303,7 +303,6 @@
               END IF
               Npts=load_l(Nval, Cval, Ngrids, Hout(idQcon,:))
             CASE ('Hout(idQrhs)')
-              print *, "idQrhs"
               IF (idQrhs.eq.0) THEN
                 IF (Master) WRITE (out,80) 'idQrhs'
                 exit_flag=5

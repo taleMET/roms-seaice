@@ -390,15 +390,15 @@
 !  Gradient coefficient for heat conductivity term.
 !
           b2d(i,j)=2.0_r8*alph(i,j)/(ice_thick(i,j)*(1.0_r8+Coa(i,j)))
-          Fi(i,j,icQcon)=Fi(i,j,icQcon)+                                &
-     &                   b2d(i,j)
+          Fi(i,j,icQcon)=Fi(i,j,icQcon)!+                                &
+!     &                   b2d(i,j)
 !
 !  Downward conductivity term, assuming the ocean at the freezing point
 !  (convert ice temperature to Kelvin).
 !
           IF (Si(i,j,linew,isAice).gt.min_ai(ng)) THEN
-            Fi(i,j,icQrhs)=Fi(i,j,icQrhs)+                              &
-     &                     b2d(i,j)*(Si(i,j,linew,isTice)+273.15_r8)
+            Fi(i,j,icQrhs)=Fi(i,j,icQrhs)!+                              &
+!     &                     b2d(i,j)*(Si(i,j,linew,isTice)+273.15_r8)
 !
 !  Compute temperature at the snow/ice interface (convert to Celsius).
 !
