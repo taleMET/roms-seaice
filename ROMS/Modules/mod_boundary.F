@@ -1959,8 +1959,6 @@
       Dmem(ng)=Dmem(ng)+REAL(nIceS,r8)*Xsize
 
 # ifndef ANA_AIOBC
-! should maybe divide this into all ANA for all ice-variables??
-! Allocating all boundary variables if one is needed
       IF (ANY (LBC(iwest,ibICE(1):ibICE(15),ng)%acquire)) THEN
         allocate ( BOUNDARY(ng) % iceG_west(nIceS,LBj:UBj,2) )
         Dmem(ng)=Dmem(ng)+REAL(nIceS*2,r8)*Ysize

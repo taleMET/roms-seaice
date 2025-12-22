@@ -1256,7 +1256,6 @@
 
 #ifdef ICE_MODEL
 # ifndef ANA_AIOBC 
-! need to think about these ana-things for ice..
       IF (LprocessOBC(ng)) THEN
         DO i=1,15!nIceS
           ! If the ice variable is a velocity variable, we must make sure we
