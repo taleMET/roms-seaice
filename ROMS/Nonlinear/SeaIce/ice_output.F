@@ -530,7 +530,7 @@
         IF (iFice(ifld).gt.0) THEN
           ifield=iFice(ifld)
           IF (S(ng)%ncid.eq.RST(ng)%ncid) THEN
-            LwrtVar=.FALSE.
+            LwrtVar=.TRUE.
           ELSE
             LwrtVar=VarOut(ifield,ng)
           END IF
